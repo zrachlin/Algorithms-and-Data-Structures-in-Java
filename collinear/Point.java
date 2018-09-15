@@ -10,8 +10,6 @@
 
 import edu.princeton.cs.algs4.StdDraw;
 
-import java.util.Comparator;
-
 public class Point implements Comparable<Point> {
 
     private final int x;     // x-coordinate of this point
@@ -61,6 +59,15 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
+        if (this.x == that.x) {
+            if (this.y == that.y) {
+                return Double.NEGATIVE_INFINITY;
+            }
+            return Double.POSITIVE_INFINITY;
+        } else if (this.y == that.y) {
+            return +0.0;
+        }
+        return ((double) (that.y - this.y) / (that.x - this.x));
     }
 
     /**
@@ -77,6 +84,19 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
+        if (this.y > that.y) {
+            return 1;
+        } else if (this.y == that.y) {
+            if (this.x > that.x) {
+                return 1;
+            } else if (this.x == that.x) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
     }
 
     /**
@@ -85,9 +105,11 @@ public class Point implements Comparable<Point> {
      *
      * @return the Comparator that defines this ordering on points
      */
-    public Comparator<Point> slopeOrder() {
-        /* YOUR CODE HERE */
-    }
+    //public Comparator<Point> slopeOrder() {
+    /* YOUR CODE HERE */
+    //return (o1, o2) -> Double.compare(slopeTo(o1), slopeTo(o2));
+
+    //}
 
 
     /**
@@ -107,5 +129,8 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         /* YOUR CODE HERE */
+        Point p = new Point(3, 5);
+        Point q = new Point(1, 4);
+        System.out.println(p.compareTo(q));
     }
 }
